@@ -1,0 +1,159 @@
+/* Hero Slider Styles */
+.hero-slider {
+    width: 100%;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.hero-slider .swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slider .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Image backgrounds - will be set dynamically from config */
+.hero-slide-1 {
+    background-image: url('https://via.placeholder.com/1920x600/667eea/ffffff?text=Banner+1');
+}
+
+.hero-slide-2 {
+    background-image: url('https://via.placeholder.com/1920x600/f093fb/ffffff?text=Banner+2');
+}
+
+.hero-slide-3 {
+    background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1920');
+}
+
+.hero-slide-4 {
+    background-image: url('https://via.placeholder.com/1920x600/ff6b6b/ffffff?text=Banner+4');
+}
+
+.hero-slide-5 {
+    background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920');
+}
+
+/* Swiper Pagination */
+.hero-slider .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: white;
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+
+.hero-slider .swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 30px;
+    border-radius: 6px;
+}
+
+/* Flash Sale Banner */
+.flash-sale-banner {
+    background: #ffd814;
+    color: black;
+    padding: 21px 0;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.flash-sale-header {
+    margin-bottom: 14px;
+}
+
+.flash-sale-header h2 {
+    font-size: 22.4px;
+    font-weight: 700;
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.flash-sale-header h2 i {
+    animation: flash 1.5s infinite;
+}
+
+.flash-sale-header p {
+    font-size: 12.6px;
+    opacity: 0.9;
+    margin-bottom: 10.5px;
+}
+
+/* Scrolling Text Banner */
+.scrolling-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    box-sizing: border-box;
+    user-select: none;
+    background: linear-gradient(90deg, #007bff, #00d4ff, #007bff);
+    background-size: 200% 100%;
+    color: white;
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 20px;
+    position: relative;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.scrolling-text #scrolling-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll 20s linear infinite, textGlow 1.5s ease-in-out infinite alternate;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00d4ff, 0 0 20px #00d4ff;
+    }
+    to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00d4ff, 0 0 40px #00d4ff;
+    }
+}
+
+.scrolling-text:hover #scrolling-text {
+    animation-play-state: paused;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-slider {
+        height: 400px;
+    }
+    
+    .flash-sale-header h2 {
+        font-size: 16.8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-slider {
+        height: 300px;
+    }
+}

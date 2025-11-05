@@ -1,0 +1,98 @@
+/* Form Styles */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-group.has-title .form-label {
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    background: white;
+    padding: 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #495057;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+.form-input:focus {
+    border-color: var(--primary-color);
+}
+
+.form-input:focus::placeholder {
+    opacity: 0.5;
+}
+
+.form-group.has-title .form-input {
+    padding-top: 12px;
+}
+
+.form-input.error {
+    border-color: var(--danger-color);
+}
+
+.form-input.success {
+    border-color: var(--success-color);
+}
+
+.error-message {
+    color: var(--danger-color);
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.form-group .optional-badge {
+    color: #6c757d;
+    font-size: 11px;
+    font-weight: 400;
+    margin-left: 4px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.order-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #ffd814;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 1rem;
+}

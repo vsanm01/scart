@@ -1,0 +1,83 @@
+/* Utility Classes */
+
+/* Currency Symbol Helper */
+.price::before,
+.currency-prefix::before {
+    content: attr(data-currency);
+}
+
+/* Stock Status Classes */
+.stock-status {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.stock-available {
+    color: var(--success-color);
+}
+
+.stock-low {
+    color: var(--warning-color);
+}
+
+.stock-out {
+    color: var(--danger-color);
+}
+
+/* Badge Classes */
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ffd814;
+    color: black;
+    font-size: 14px;
+    padding: 2px 6px;
+    border-radius: 15px;
+    font-weight: 700;
+}
+
+/* Action Icon */
+.action-icon {
+    background: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+    border: none;
+}
+
+.action-icon:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Display Utilities */
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+/* Transitions */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Cursor */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-zoom-in {
+    cursor: zoom-in;
+}
