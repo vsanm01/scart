@@ -1,0 +1,36 @@
+ /* Disable text selection and dragging */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -moz-user-drag: none;
+            -ms-user-drag: none;
+            user-drag: none;
+        }
+
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+
+
+
+        /* Hide default Blogger elements */
+        .blog-feeds,
+        .post-feeds,
+        .comments,
+        .comment-form,
+        .blog-pager,
+        .post-share-buttons,
+        .post-footer,
+        .post-author,
+        .post-timestamp,
+        .post-labels,
+        .subscribe-section {
+            display: none !important;
+        }
