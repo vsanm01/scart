@@ -114,7 +114,7 @@ async loadMessagesFromSheet() {
     this.log('📡 Loading messages from Google Sheets...');
 
     try {
-        // Get script URL - try multiple sources
+        // Get script URL
         let scriptUrl = this.options.scriptUrl;
         
         if (!scriptUrl && typeof GSRCDN_CONFIG !== 'undefined' && GSRCDN_CONFIG.scriptUrl) {
@@ -126,10 +126,10 @@ async loadMessagesFromSheet() {
         }
 
         if (!scriptUrl) {
-            throw new Error('❌ No script URL found. Set GSRCDN.config.scriptUrl or pass scriptUrl in options.');
+            throw new Error('❌ No script URL found');
         }
 
-        // Build URL for Sheet3 scrolling messages PUBLIC endpoint
+        // Build URL for Sheet3
         const url = `${scriptUrl}?sheet=Sheet3&type=scrolling`;
         this.log(`🔗 Fetching from: ${url}`);
 
@@ -142,31 +142,23 @@ async loadMessagesFromSheet() {
         const result = await response.json();
         this.log('📦 Raw response:', result);
 
-        // Check for errors
         if (result.error) {
             throw new Error(result.error);
         }
 
-        // Parse the NEW Sheet3 scrolling endpoint format
+        // Parse new format with COLORS preserved
         if (result.success && Array.isArray(result.data) && result.data.length > 0) {
-            // New format: { success, count, data: [{effect, message, priority, row}], timestamp }
-            this.log(`✅ Found ${result.count} active messages in new format`);
+            this.log(`✅ Found ${result.count} active messages`);
             
+            // ✅ FIXED: Preserve all color fields from Sheet3
             this.messages = result.data.map(item => ({
                 effect: String(item.effect || 'rainbow').toLowerCase().trim(),
                 message: String(item.message || '').trim(),
-                priority: parseInt(item.priority) || 1
+                priority: parseInt(item.priority) || 1,
+                textColor: item.textColor || null,      // ← NEW
+                bgColor: item.bgColor || null,          // ← NEW
+                blinkSpeed: item.blinkSpeed || 'medium' // ← NEW
             }));
-            
-        } else if (Array.isArray(result.data) && result.data.length > 0) {
-            // Fallback: Try parsing as array format
-            this.log('📋 Parsing as array format...');
-            this.messages = this.parseSheetData(result.data);
-            
-        } else if (Array.isArray(result) && result.length > 0) {
-            // Another fallback: Direct array
-            this.log('📋 Parsing direct array...');
-            this.messages = this.parseSheetData(result);
             
         } else {
             throw new Error('No valid data found in response');
@@ -177,37 +169,32 @@ async loadMessagesFromSheet() {
         this.log(`✅ Validated ${this.messages.length} messages`);
 
         if (this.messages.length === 0) {
-            this.log('⚠️ No valid messages found, using fallback');
+            this.log('⚠️ No valid messages, using fallback');
             this.messages = this.options.fallbackMessages;
         } else {
-            // Expand messages based on priority (duplicate high priority messages)
+            // Expand based on priority
             const originalCount = this.messages.length;
             this.messages = this.expandMessagesByPriority(this.messages);
-            this.log(`📊 Expanded from ${originalCount} to ${this.messages.length} messages based on priority`);
+            this.log(`📊 Expanded from ${originalCount} to ${this.messages.length} messages`);
         }
 
-        // Shuffle if random order
+        // Shuffle if random
         if (this.options.randomOrder) {
             this.shuffleMessages();
             this.log('🔀 Messages shuffled');
         }
 
-        this.log('✅ Messages loaded successfully!');
+        this.log('✅ Messages loaded with colors!');
 
     } catch (error) {
-        this.error('❌ Error loading messages from Sheet3:', error);
+        this.error('❌ Error loading messages:', error);
         this.messages = this.options.fallbackMessages;
-        this.log(`⚠️ Using ${this.messages.length} fallback messages`);
         
         if (this.options.onError) {
             this.options.onError(error);
         }
     }
 }
-
-
-
-
 
         /**
          * Parse Google Sheets data
@@ -260,23 +247,23 @@ expandMessagesByPriority(messages) {
     const expanded = [];
     
     messages.forEach(msg => {
-        // Clamp priority between 1 and 10
         const priority = Math.max(1, Math.min(parseInt(msg.priority) || 1, 10));
         
-        // Add message 'priority' number of times
         for (let i = 0; i < priority; i++) {
+            // ✅ FIXED: Copy all properties including colors
             expanded.push({
                 effect: msg.effect,
                 message: msg.message,
-                priority: msg.priority
+                priority: msg.priority,
+                textColor: msg.textColor,      // ← NEW
+                bgColor: msg.bgColor,          // ← NEW
+                blinkSpeed: msg.blinkSpeed     // ← NEW
             });
         }
     });
     
     return expanded;
 }
-
-
 
 
         /**
@@ -318,33 +305,62 @@ expandMessagesByPriority(messages) {
         /**
          * Change to next message
          */
-        changeMessage() {
-            if (this.messages.length === 0) return;
+    
+changeMessage() {
+    if (this.messages.length === 0) return;
 
-            // Get current message
-            const currentMessage = this.messages[this.currentIndex];
+    // Get current message
+    const currentMessage = this.messages[this.currentIndex];
 
-            // Remove all effect classes
-            this.availableEffects.forEach(effect => {
-                this.container.classList.remove(effect);
-            });
+    // Remove all effect classes
+    this.availableEffects.forEach(effect => {
+        this.container.classList.remove(effect);
+    });
 
-            // Add new effect class
-            this.container.classList.add(currentMessage.effect);
+    // Add new effect class
+    this.container.classList.add(currentMessage.effect);
 
-            // Update text
-            this.textElement.textContent = currentMessage.message;
+    // Update text
+    this.textElement.textContent = currentMessage.message;
 
-            // Callback
-            if (this.options.onChange) {
-                this.options.onChange(currentMessage, this.currentIndex);
-            }
+    // ✅ NEW: Apply colors from Sheet3
+    if (currentMessage.textColor) {
+        this.textElement.style.color = currentMessage.textColor;
+    }
+    
+    if (currentMessage.bgColor) {
+        this.container.style.backgroundColor = currentMessage.bgColor;
+    }
 
-            this.log(`Changed to effect: ${currentMessage.effect}`);
+    // ✅ NEW: Apply blink speed using CSS variable
+    if (currentMessage.blinkSpeed) {
+        const speeds = {
+            'slow': '2s',
+            'medium': '1s',
+            'fast': '0.5s'
+        };
+        const speed = speeds[currentMessage.blinkSpeed] || '1s';
+        this.container.style.setProperty('--blink-speed', speed);
+    }
 
-            // Move to next message
-            this.currentIndex = (this.currentIndex + 1) % this.messages.length;
-        }
+    // ✅ NEW: Set data attribute for CSS targeting
+    if (currentMessage.effect) {
+        this.container.setAttribute('data-effect', currentMessage.effect);
+    }
+
+    // Callback
+    if (this.options.onChange) {
+        this.options.onChange(currentMessage, this.currentIndex);
+    }
+
+    this.log(`Changed to effect: ${currentMessage.effect}, colors: ${currentMessage.textColor}/${currentMessage.bgColor}`);
+
+    // Move to next message
+    this.currentIndex = (this.currentIndex + 1) % this.messages.length;
+}
+
+
+
 
         /**
          * Setup hover pause functionality
