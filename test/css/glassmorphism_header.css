@@ -1,0 +1,356 @@
+/**
+ * Glassmorphism Transparent Header Styles
+ * Version: 1.0.0
+ * Modern transparent and glossy header design
+ */
+
+/* ============================================
+   GLASSMORPHISM TOP HEADER
+   ============================================ */
+
+.header-top {
+    background: rgba(31, 41, 55, 0.7) !important;  /* Semi-transparent dark */
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    color: #ffffff !important;
+    padding: 12px 0 !important;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glossy overlay effect */
+.header-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+}
+
+/* Shimmer effect (optional animated shine) */
+.header-top::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 70%
+    );
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%);
+    }
+}
+
+/* Container styling */
+.header-top .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Contact info styling */
+.header-top span {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.header-top span:hover {
+    color: rgba(255, 255, 255, 1) !important;
+    transform: translateY(-1px);
+}
+
+.header-top span i {
+    margin-right: 6px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Social media icons - Glassmorphism style */
+.header-top a {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glossy shine on icons */
+.header-top a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        transparent 100%
+    );
+    border-radius: 50% 50% 0 0;
+}
+
+/* Hover effects for social icons */
+.header-top a:hover {
+    transform: translateY(-3px) scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+}
+
+/* Individual social media colors on hover */
+.header-top a[href*="facebook"]:hover {
+    background: rgba(59, 89, 152, 0.3);
+    border-color: rgba(59, 89, 152, 0.5);
+    box-shadow: 0 8px 16px rgba(59, 89, 152, 0.3);
+}
+
+.header-top a[href*="twitter"]:hover,
+.header-top a[href*="x.com"]:hover {
+    background: rgba(29, 161, 242, 0.3);
+    border-color: rgba(29, 161, 242, 0.5);
+    box-shadow: 0 8px 16px rgba(29, 161, 242, 0.3);
+}
+
+.header-top a[href*="instagram"]:hover {
+    background: linear-gradient(45deg, 
+        rgba(131, 58, 180, 0.3), 
+        rgba(253, 29, 29, 0.3), 
+        rgba(252, 176, 69, 0.3)
+    );
+    border-color: rgba(253, 29, 29, 0.5);
+    box-shadow: 0 8px 16px rgba(253, 29, 29, 0.3);
+}
+
+/* Icon sizing */
+.header-top a i {
+    font-size: 16px;
+    z-index: 1;
+}
+
+/* ============================================
+   ALTERNATIVE STYLES (Choose One)
+   ============================================ */
+
+/* Style Option 1: Ultra Glossy */
+.header-top.ultra-glossy {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(20px) saturate(200%) brightness(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(200%) brightness(1.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Style Option 2: Frosted Glass */
+.header-top.frosted {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(15px) contrast(120%);
+    -webkit-backdrop-filter: blur(15px) contrast(120%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Style Option 3: Gradient Glass */
+.header-top.gradient-glass {
+    background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.4) 0%,
+        rgba(118, 75, 162, 0.4) 100%
+    ) !important;
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Style Option 4: Dark Glass */
+.header-top.dark-glass {
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(10px) brightness(0.8);
+    -webkit-backdrop-filter: blur(10px) brightness(0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .header-top {
+        padding: 10px 0 !important;
+        font-size: 12px;
+    }
+    
+    .header-top .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .header-top a {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .header-top a i {
+        font-size: 14px;
+    }
+    
+    /* Disable animations on mobile for performance */
+    .header-top::after {
+        animation: none;
+    }
+}
+
+/* ============================================
+   ENHANCED EFFECTS (Optional)
+   ============================================ */
+
+/* Glow effect */
+.header-top.with-glow {
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(102, 126, 234, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Pulsing glow animation */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 
+            0 4px 6px rgba(0, 0, 0, 0.1),
+            0 0 20px rgba(102, 126, 234, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 4px 6px rgba(0, 0, 0, 0.1),
+            0 0 30px rgba(102, 126, 234, 0.4);
+    }
+}
+
+.header-top.pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Liquid effect borders */
+.header-top.liquid-borders {
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(
+        90deg,
+        rgba(102, 126, 234, 0.5),
+        rgba(118, 75, 162, 0.5),
+        rgba(102, 126, 234, 0.5)
+    ) 1;
+    border-image-slice: 1;
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATION
+   ============================================ */
+
+/* Disable effects for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .header-top::after {
+        animation: none;
+    }
+    
+    .header-top a:hover {
+        transform: none;
+    }
+    
+    .header-top.pulse-glow {
+        animation: none;
+    }
+}
+
+/* GPU acceleration for smooth effects */
+.header-top,
+.header-top::before,
+.header-top::after,
+.header-top a {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* ============================================
+   BROWSER COMPATIBILITY
+   ============================================ */
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(10px)) {
+    .header-top {
+        background: rgba(31, 41, 55, 0.95) !important;
+    }
+    
+    .header-top a {
+        background: rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* Safari specific fixes */
+@supports (-webkit-backdrop-filter: blur(10px)) {
+    .header-top {
+        -webkit-backdrop-filter: blur(10px) saturate(180%);
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Remove shimmer effect */
+.header-top.no-shimmer::after {
+    display: none;
+}
+
+/* Increase blur intensity */
+.header-top.extra-blur {
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+}
+
+/* Reduce transparency */
+.header-top.less-transparent {
+    background: rgba(31, 41, 55, 0.9) !important;
+}
+
+/* More transparent */
+.header-top.more-transparent {
+    background: rgba(31, 41, 55, 0.4) !important;
+}
